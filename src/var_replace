@@ -1,0 +1,1 @@
+find . -type f | xargs perl -pi -e 's/CD Type([ ]+)Navn([ ]+)Ii\/U([ ]+)Forklaring/CD Type\1Name\2I\/O\3Explanation/g'

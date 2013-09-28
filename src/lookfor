@@ -1,0 +1,1 @@
+LC_ALL=nb_NO.iso88591 grep -h -R "^CD" * | sort | sed -e 's/ [ ]*/ /gp' | uniq -c | sort -b -g | awk '$1>15 && $3 !~ /[=|-]+/ {print $0;}'
