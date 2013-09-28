@@ -698,7 +698,7 @@ CD Retur-verdier: short  UT_OK  - Lesing er ok
 CD                short  UT_ERROR - Du har fått feil ved flushingen
 CD
 CD Parameters:
-CD Navn      Type  Array i/U Merknad
+CD Name      Type  Array I/O Explanation
 CD ------------------------------------------------------------------
 CD pfil      FILE         i   Peker til filstruktur (def i stdio.h)
    ==================================================================
@@ -723,7 +723,7 @@ CD Retur-verdier: short  UT_OK  - Lesing er ok
 CD                short  UT_ERROR - Du har fått feil.
 CD
 CD Parameters:
-CD Navn      Type  Array i/U Merknad
+CD Name      Type  Array I/O Explanation
 CD ------------------------------------------------------------------
 CD pfil      FILE         i   Peker til filstruktur (def i stdio.h)
 CD lpos      long         i   Fil-posisjon
@@ -774,7 +774,7 @@ CD Retur-verdier: short  UT_OK  - Lesing er ok
 CD                short  UT_ERROR - Du har fått feil.
 CD
 CD Parameters:
-CD Navn      Type  Array i/U Merknad
+CD Name      Type  Array I/O Explanation
 CD ------------------------------------------------
 CD pfil      FILE         i   Peker til filstruktur (def i stdio.h)
 CD lpos      long         o   Peker til filposisjon
