@@ -1,7 +1,7 @@
 /* === 920413 ============================================================= */
 /*  STATENS KARTVERK  -  FYSAK-PC                                           */
-/*  Fil: fyld.c                                                             */
-/*  Innhold: Lagring og henting av indekstabeller                           */
+/*  File: fyld.c                                                            */
+/*  Content: Storage and retrieval of index tables                          */
 /* ======================================================================== */
 
 #include "stdafx.h"
@@ -11,22 +11,22 @@
 
 
 
-/* Globale strukturer for fyba */
+/* Global structures for fyba */
 extern LC_SYSTEMADM    Sys;
 
 
 
 /*
 AR:2004-05-04
-CH LC_DelIdx                                            Sletter indeksfilene
+CH LC_DelIdx                                        Delete index tables/files
 CD ==========================================================================
 CD Purpose:
-CD Sletter indeksfilene for gitt SOSI-fil.
+CD Delete the index tables/files for a given SOSI-file.
 CD
 CD Parameters:
 CD Type  Name     I/O Explanation
 CD --------------------------------------------------------------------------
-CD char *szSosFil  i  SOSI-filnavn
+CD char *szSosFil  i  SOSI-filename
 CD
 CD Usage:
 CD LC_DelIdx(szSosFil);
@@ -39,19 +39,19 @@ SK_EntPnt_FYBA void LC_DelIdx(char *szSosFil)
    char drive2[_MAX_DRIVE],dir2[_MAX_DIR],fname2[_MAX_FNAME],ext2[_MAX_EXT];
 
 
-   // Bygg opp fullstendig filnavn
+   // Find absolute path
    UT_FullPath(fil,szSosFil,_MAX_PATH);
 
-   // Splitt filnavnet
+   // Extract a path components
    UT_splitpath(fil,drive1,dir1,fname1,ext1);
 
-   // Lag subdirectory navn
+   // Generate subdirectory names/paths
    if ( *Sys.szIdxPath != 0) {
-      // Gitt sti for indeksfilene
+      // If we have been given a path for the index files
       UT_splitpath(Sys.szIdxPath,drive2,dir2,fname2,ext2);
       UT_makepath(sdir,drive2,dir2,fname1,"");
    } else {
-      // Ikke gitt sti.
+      // No path was given
       UT_makepath(sdir,drive1,dir1,fname1,"");
    }
 
@@ -61,16 +61,16 @@ SK_EntPnt_FYBA void LC_DelIdx(char *szSosFil)
    UT_StrCat(dir2,UT_STR_SLASH,_MAX_DIR);
 
    //
-   // Fjern indeks filene
+   // Delete index tables/files
    //
 
-   // Administrasjonstabeller
+   // Management tables
    UT_makepath(fil,drive2,dir2,"Adm",".Idx");
    UT_DeleteFile(fil);
    UT_makepath(fil,drive2,dir2,"admin",".idx");       /* FYBA - C */
    UT_DeleteFile(fil);
 
-   // Ringbuffer
+   // Circular buffer (ring buffer)
    UT_makepath(fil,drive2,dir2,"Rb",".Idx"); 
    UT_DeleteFile(fil);
    
