@@ -1,26 +1,27 @@
 /*
 CH  FYBA                                             FYsak-Basesystem
 CD  ==================================================================
-CD  Rutiner for å lese, endre og skrive SOSI-filer.
+CD  Routines/functions to read, modify and write SOSI files.
 CD  ==================================================================
 CD
-CH  INSTALLERINGS- OG BRUKS-OPPLYSNINGER:
+CH  INSTALLATION AND USAGE:
 CD
-CD  Bibliotek..: fybale.lib
-CD  Kildefiler.: fyba.c, fylo.c, fyln.c, fylr.c, fyls.c, fylx.c, fyli.c
+CD  Library....: fybale.lib
+CD  Sourcefiles: fyba.c, fylo.c, fyln.c, fylr.c, fyls.c, fylx.c, fyli.c
 CD               fylh.c, fyho.c, fyle.c, fyba.h, fybax.h
-CD  Versjon....: D01
-CD  Eier.......: STATENS KARTVERK / FYSAK-prosjektet
-CD  Ansvarlig..: Andreas Røstad, Georg Langerak
+CD  Version....: D01
+CD  Owner......: NATIONAL MAPPING AUTHORITY OF NORWAY / 
+CD               KARTVERK / FYSAK-project
+CD  Responsible: Andreas Røstad, Georg Langerak
 CD
-CD  Kompilator.: Microsoft C versjon 6.0
-CD  Optioner...: /c /AL /J /FPi /G2t /W4
+CD  Compiler...: Microsoft C versjon 6.0
+CD  Options....: /c /AL /J /FPi /G2t /W4
 CD  Memory-mod.: Large
 CD  Floating-p.: Emulation
 CD  Processor..: 80286
 CD
 CD  #include...: fyba.h
-CD  Linkes med.: utle.lib    >=  versjon D
+CD  Link with..: utle.lib    >=  versjon D
 CD              +llibce.lib  >=  versjon 6.0
 CD
 CD  ==================================================================
@@ -30,10 +31,10 @@ CD  ==================================================================
 
 
 /*
-CH LC_InqVer                                                   Identifikasjon
+CH LC_InqVer                                                   Identification
 CD =============================================================================
 CD Purpose:
-CD Henter versjons-identifikasjon for dette biblioteket.
+CD Retrieves version identifier for this library.
    =============================================================================
 */
 SK_EntPnt_FYBA char *LC_InqVer(void)
