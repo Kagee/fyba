@@ -1,0 +1,11 @@
+Document: libfyba
+Title: libfyba Manual
+Author: 
+Abstract: This manual describes what libfyba is
+ and how it can be used to
+ manage online manuals on Debian systems.
+Section: unknown
+
+doc/no_NB/fyba1.html
+doc/no_NB/fyba2.html
+doc/no_NB/fyba.html
