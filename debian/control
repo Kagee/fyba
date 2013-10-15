@@ -23,9 +23,3 @@ Description: FYBA library to read and write norwegian geodata standard format SO
  OpenFYBA is the source code release of the FYBA library, distributed by the 
  National Mapping Authority of Norway (Statens kartverk) to read and write 
  files in the National geodata standard format SOSI.
-
- The original library has a long history, and was originally developed for 
- systems as diverse as DOS, OS/2-16, OS/2-32, Win16, Win32, and various UNIX 
- variants (POSIX, HPUX, Silicon graphics). In Norwegian. It shows in the 
- source code. OpenFYBA has been tested to run at least on Windows and Linux 
- environments.
