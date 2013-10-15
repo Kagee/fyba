@@ -1,18 +1,10 @@
-/*------------------------------------------------------------------------
- * filename - spltpath.c
- *
- * function(s)
- *        DotFound - checks for special directory names
- *        UT_splitpath - split a full path name (MSC compatible)
- *-----------------------------------------------------------------------*/
-
-/*
- *      C/C++ Run Time Library - Version 5.0
- *
- *      Copyright (c) 1987, 1992 by Borland International
- *      All Rights Reserved.
- *
- */
+///////////////////////////////////////////////////////////////////////////////////
+// SPLITPATH.cpp
+//
+// Funksjoner
+//        PrikkFunnet - sjekker etter spesielle kataloger
+//        UT_splitpath - split a full path name (MSC compatible)
+//
 
 #include "stdafx.h"
 #include <string.h>
@@ -25,22 +17,18 @@
 #include <windows.h>
 #endif
 
-
 #include "fyut.h"
 
+#ifdef LINUX
+#define wchar_t char
+#define wcslen  strlen
+#endif
 
-/*---------------------------------------------------------------------*
+///////////////////////////////////////////////////////////////////////
+//
+// PrikkFunnet - sjekker etter spesielle kataloger
 
-Name            DotFound - checks for special dir name cases
-
-Usage           int DotFound(char *pB);
-
-Prototype in    local to this module
-
-Description     checks for special directory names
-
-*---------------------------------------------------------------------*/
-static size_t DotFound(char *pB)
+static size_t PrikkFunnet(wchar_t *pB)
 {
         if (*(pB-1) == '.')
                 pB--;
@@ -59,60 +47,8 @@ static size_t DotFound(char *pB)
         return UT_FALSE;
 }
 
-/*---------------------------------------------------------------------*
-
-Name            UT_splitpath - splits a full path name into its components
-
-Usage           #include <fyut.h>
-                void UT_splitpath(const char *path, char * drive, char * dir,
-                             char * name, char * ext);
-
-Related
-functions usage void UT_makepath(char *path, const char *drive, const char *dir,
-                            const char *name, const char *ext);
-
-Prototype in    fyut.h
-
-Description     UT_splitpath takes a file's full path name (path) as a string
-                in the form
-
-                        X:\DIR\SUBDIR\NAME.EXT
-
-                and splits path into its four components. It then stores
-                those components in the strings pointed to by drive, dir,
-                name and ext. (Each component is required but can be a
-                NULL, which means the corresponding component will be
-                parsed but not stored.)
-
-                The maximum sizes for these strings are given by the
-                constants _MAX_DRIVE, _MAX_DIR, _MAX_PATH, _MAX_NAME and _MAX_EXT,
-                (defined in fyut.h) and each size includes space for the
-                null-terminator.
-
-                UT_splitpath assumes that there is enough space to store each
-                non-NULL component. fnmerge assumes that there is enough
-                space for the constructed path name. The maximum constructed
-                length is _MAX_PATH.
-
-                When UT_splitpath splits path, it treats the punctuation as
-                follows:
-
-                * drive keeps the colon attached (C:, A:, etc.)
-
-                * dir keeps the leading and trailing backslashes
-                  (\turboc\include\,\source\, etc.)
-
-                * ext keeps the dot preceding the extension (.c, .exe, etc.)
-
-                UT_splitpath and _makepath are invertible; if you
-                split a given path with UT_splitpath, then
-                merge the resultant components with UT_makepath, you end up
-                with path.
-
-Return value    UT_splitpath does not return a value.
-
-*---------------------------------------------------------------------*/
-
+//////////////////////////////////////////////////////////////////////////////////////
+// UT_splitpath - splits a full path name into its components
 
 /*
 AR-930423
@@ -128,23 +64,22 @@ CD
 CD PARAMETERLISTE:
 CD Type         Navn       I/U  Merknad
 CD --------------------------------------------------------------
-CD char        *pszPath   i   Komplett filnavn
-CD const char  *pszDrive  u   Disk
-CD const char  *pszDir    u   Katalog
-CD const char  *pszNavn   u   Navn
-CD const char  *pszExt    u   Extension
+CD wchar_t        *pszPath   i   Komplett filnavn
+CD const wchar_t  *pszDrive  u   Disk
+CD const wchar_t  *pszDir    u   Katalog
+CD const wchar_t  *pszNavn   u   Navn
+CD const wchar_t  *pszExt    u   Extension
 CD
 CD Bruk:  UT_splitpath(szPath,szDrive,szDir,szNavn,szExt);
    ==================================================================
 */
-SK_EntPnt_UT void UT_splitpath(const char *pathP, char *driveP, char *dirP,
-                  char *nameP, char *extP)
+SK_EntPnt_UT void UT_splitpath(const wchar_t *pathP, wchar_t *driveP, wchar_t *dirP, wchar_t *nameP, wchar_t *extP)
 {
-        char   *pB;
+        wchar_t   *pB;
         size_t Wrk;
         int    ExtFunnet;
 
-        char buf[ _MAX_PATH+2 ];
+        wchar_t buf[ _MAX_PATH+2 ];
 
         /*
          * Set all string to default value zero
@@ -166,7 +101,7 @@ SK_EntPnt_UT void UT_splitpath(const char *pathP, char *driveP, char *dirP,
         while (*pathP == ' ')
                 pathP++;
 
-        if ((Wrk = strlen(pathP)) >= _MAX_PATH)
+        if ((Wrk = wcslen(pathP)) >= _MAX_PATH)
                 Wrk = _MAX_PATH - 1;
         *pB++ = 0;
         UT_StrCopy(pB, pathP, Wrk+1);
@@ -181,7 +116,7 @@ SK_EntPnt_UT void UT_splitpath(const char *pathP, char *driveP, char *dirP,
                 switch (*--pB) {
                 case '.'  :
                         if (!Wrk && (*(pB+1) == '\0'))
-                                Wrk = DotFound(pB);
+                                Wrk = PrikkFunnet(pB);
                         if ((!Wrk) && (!ExtFunnet)) {
                                 ExtFunnet = UT_TRUE;
                                 UT_StrCopy(extP, pB, _MAX_EXT);
