@@ -1,0 +1,10 @@
+# Generated windows binaries
+Lib/*
+# Windows Debug builds
+*Debug*
+# 
+*.sdf
+*.opensdf
+*.suo
+# Windows precompiled headers
+*ipch*
