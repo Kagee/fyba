@@ -1,0 +1,11 @@
+Document: libfyba-dev
+Title: libfyba function manual
+Author: 
+Abstract: This manual describes the fyba library
+ It goes not decribe the GM or UT supporting
+ libraries.
+Section: unknown
+
+doc/no_NB/fyba1.html
+doc/no_NB/fyba2.html
+doc/no_NB/fyba.html
