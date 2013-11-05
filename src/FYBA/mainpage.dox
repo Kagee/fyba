@@ -1,0 +1,46 @@
+/*! 
+ * \mainpage FYBA - A storage system for spatial data in the SOSI format
+ * \tableofcontents
+ *
+ * \section intro_sec Introduction
+ *
+ * FYBA is a library routine to handle SOSI files in the most elegant way, with respect. searching, browsing   and updating. FYBA is now adapted SOSI format version 4.0, and is continuously adapted to new SOSI versions. 
+* This manual is designed for personnel who are familiar with SOSI and C programming. All routine interfaces and constants are defined in the file FYBA.H. This file should be included with all files to use FYBA routines. 
+* FYBA is written in ANSI C, and can be compiled on all platforms where a suitable compiler can be found. However, there are some auxiliary routines that are machine / OS dependent. These are partitioned off into a separate library (UT) which must be adapted to the machine / OS. This is tested under DOS, OS/2-16, OS/2-32, Win16, Win32, X64 and misc. UNIX variants (POSIX, HPUX, Silicon Graphics). 
+ *
+ * \section func_sec Overview of the functionality of FYBA
+ *
+ * FYBA is a library routine that establishes and maintains its own "index files" (*.IDX) with the information necessary for reading, writing, search and manipulation of data in SOSI files. As an overview, the following figure explain the relationship between SOSI files, the library and user programs.
+ *
+ * \verbatim
+                           !--------------!
+        !----------------->! Index files  !<-------!
+        !                  !--------------!        !
+        !                         ^                !
+        !                         !                !
+        !                     !---!------!         !     !--------------!
+        !                     !          !         !---->!              !
+        !                     ! Buffer   !               !              !
+ !------!-------!  LC_Rxxxx   !          !  LC_PutXxx    ! User program !
+ ! SOSI file(s) !<----------- ! internal !<------------- !              !
+ !              ! ----------->!          !               !              !
+ !--------------!  LC_Wxxxx   ! to the   ! ------------->!              !
+                              !          !  LC_GetXxx    !              !
+                              ! FYBA-    !               !              !
+                              !          !               !              !
+                              ! routines !               !--------------!
+                              !          !
+                              !----------!
+
+\endverbatim
+ *
+ * \section index_sec Index system construction
+ *
+ * The index system consists of several tables. These are partly in memory and partly in files on disk. Below is a drawing of the relevant tables. These are just briefly described, as users of the library should not need to know the structure.
+ *
+ * \subsection grout_table_sec Group table
+ *
+ * This is the main table with information about each group of SOSI files.
+ *
+ *
+ */
