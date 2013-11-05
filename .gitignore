@@ -3,3 +3,7 @@ Lib/*.lib
 *Release*
 *.sdf
 *.suo
+
+# Ignore generated doxygen
+/doc/fyba*
+
